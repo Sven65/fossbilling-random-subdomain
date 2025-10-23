@@ -3,11 +3,6 @@
     "description": "Automatically generates a unique random subdomain for hosting products.",
     "version": "1.0.0",
     "author": "Mackan",
-    "autoload": {
-        "psr-4": {
-            "FOSSBilling\\Module\\ServiceRandomSubdomain\\": "src/"
-        }
-    },
     "hooks": [
         "onBeforeClientOrderFormRender",
         "onAfterClientOrderCreate"
