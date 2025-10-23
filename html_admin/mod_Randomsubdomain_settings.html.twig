@@ -1,0 +1,153 @@
+{% extends "layout_default.html.twig" %}
+
+{% block meta_title %}Random Subdomain Settings{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">Random Subdomain Generator Settings</h3>
+    </div>
+    <div class="card-body">
+        <form method="post" action="{{ 'api/admin/randomsubdomain/update_config'|link }}" class="api-form" data-api-msg="Configuration updated successfully">
+            <div class="mb-3">
+                <label class="form-label">Default Domain</label>
+                <input type="text" name="default_domain" value="{{ admin.randomsubdomain_get_config().default_domain }}" class="form-control" placeholder="example.com">
+                <div class="form-text">The default domain to use for generated subdomains</div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Subdomain Length</label>
+                <input type="number" name="subdomain_length" value="{{ admin.randomsubdomain_get_config().subdomain_length }}" class="form-control" min="4" max="20">
+                <div class="form-text">Number of characters in generated subdomains (4-20)</div>
+            </div>
+
+            <div class="mb-3">
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" name="enabled" value="1" id="enabled" {% if admin.randomsubdomain_get_config().enabled %}checked{% endif %}>
+                    <label class="form-check-label" for="enabled">
+                        Enable automatic subdomain generation
+                    </label>
+                </div>
+                <div class="form-text">When enabled, subdomains will be automatically generated for new hosting orders</div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-save"></i> Save Settings
+            </button>
+        </form>
+    </div>
+</div>
+
+<div class="card mt-4">
+    <div class="card-header">
+        <h3 class="card-title">Test Subdomain Generator</h3>
+    </div>
+    <div class="card-body">
+        <button type="button" class="btn btn-success" id="generateTest">
+            <i class="fas fa-random"></i> Generate Random Subdomain
+        </button>
+        <div id="testResult" class="mt-3"></div>
+    </div>
+</div>
+
+<script>
+document.getElementById('generateTest').addEventListener('click', function() {
+    fetch('{{ 'api/admin/randomsubdomain/generate'|link }}', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({})
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.result && data.result.subdomain) {
+            document.getElementById('testResult').innerHTML = 
+                '<div class="alert alert-success">Generated: <strong>' + 
+                data.result.subdomain + '</strong></div>';
+        }
+    })
+    .catch(error => {
+        document.getElementById('testResult').innerHTML = 
+            '<div class="alert alert-danger">Error generating subdomain</div>';
+    });
+});
+</script>
+
+{% endblock %}{% extends "layout_default.html.twig" %}
+
+{% block meta_title %}Random Subdomain Settings{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">Random Subdomain Generator Settings</h3>
+    </div>
+    <div class="card-body">
+        <form method="post" action="{{ 'api/admin/randomsubdomain/update_config'|link }}" class="api-form" data-api-msg="Configuration updated successfully">
+            <div class="mb-3">
+                <label class="form-label">Default Domain</label>
+                <input type="text" name="default_domain" value="{{ admin.randomsubdomain_get_config().default_domain }}" class="form-control" placeholder="example.com">
+                <div class="form-text">The default domain to use for generated subdomains</div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Subdomain Length</label>
+                <input type="number" name="subdomain_length" value="{{ admin.randomsubdomain_get_config().subdomain_length }}" class="form-control" min="4" max="20">
+                <div class="form-text">Number of characters in generated subdomains (4-20)</div>
+            </div>
+
+            <div class="mb-3">
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" name="enabled" value="1" id="enabled" {% if admin.randomsubdomain_get_config().enabled %}checked{% endif %}>
+                    <label class="form-check-label" for="enabled">
+                        Enable automatic subdomain generation
+                    </label>
+                </div>
+                <div class="form-text">When enabled, subdomains will be automatically generated for new hosting orders</div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-save"></i> Save Settings
+            </button>
+        </form>
+    </div>
+</div>
+
+<div class="card mt-4">
+    <div class="card-header">
+        <h3 class="card-title">Test Subdomain Generator</h3>
+    </div>
+    <div class="card-body">
+        <button type="button" class="btn btn-success" id="generateTest">
+            <i class="fas fa-random"></i> Generate Random Subdomain
+        </button>
+        <div id="testResult" class="mt-3"></div>
+    </div>
+</div>
+
+<script>
+document.getElementById('generateTest').addEventListener('click', function() {
+    fetch('{{ 'api/admin/randomsubdomain/generate'|link }}', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({})
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.result && data.result.subdomain) {
+            document.getElementById('testResult').innerHTML = 
+                '<div class="alert alert-success">Generated: <strong>' + 
+                data.result.subdomain + '</strong></div>';
+        }
+    })
+    .catch(error => {
+        document.getElementById('testResult').innerHTML = 
+            '<div class="alert alert-danger">Error generating subdomain</div>';
+    });
+});
+</script>
+
+{% endblock %}

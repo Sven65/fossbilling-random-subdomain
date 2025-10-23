@@ -1,0 +1,16 @@
+{
+    "id": "Randomsubdomain",
+    "type": "mod",
+    "name": "Random Subdomain Generator",
+    "description": "Automatically generates random subdomains for hosting orders",
+    "homepage_url": "https://github.com/yourusername/randomsubdomain",
+    "author": "Your Name",
+    "author_url": "https://yourwebsite.com",
+    "license": "Apache-2.0",
+    "version": "1.0.0",
+    "icon_url": null,
+    "download_url": null,
+    "project_url": "https://github.com/yourusername/randomsubdomain",
+    "minimum_boxbilling_version": "0.1.0",
+    "maximum_boxbilling_version": null
+}
