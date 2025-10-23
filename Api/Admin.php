@@ -3,7 +3,9 @@
  * Random Subdomain Admin API
  */
 
-class Api_Admin extends Api_Abstract
+namespace Box\Mod\Randomsubdomain\Api;
+
+class Admin extends \Api_Abstract
 {
     /**
      * Generate a random subdomain

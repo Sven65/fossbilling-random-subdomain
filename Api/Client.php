@@ -3,7 +3,9 @@
  * Random Subdomain Client API
  */
 
-class Api_Client extends Api_Abstract
+namespace Box\Mod\Randomsubdomain\Api;
+
+class Client extends \Api_Abstract
 {
     /**
      * Generate a random subdomain for clients

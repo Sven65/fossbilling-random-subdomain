@@ -3,16 +3,18 @@
  * Random Subdomain Admin Controller
  */
 
-class Controller_Admin
+namespace Box\Mod\Randomsubdomain\Controller;
+
+class Admin implements \FOSSBilling\InjectionAwareInterface
 {
     protected $di;
 
-    public function setDi($di)
+    public function setDi(\Pimple\Container|null $di): void
     {
         $this->di = $di;
     }
 
-    public function getDi()
+    public function getDi(): ?\Pimple\Container
     {
         return $this->di;
     }
@@ -20,18 +22,21 @@ class Controller_Admin
     /**
      * Default admin page
      */
-    public function index()
+    public function register(\Box_App &$app)
     {
-        $this->di['is_admin_logged'];
-        return $this->di['view']->render('mod_Randomsubdomain_index');
+        $app->get('/randomsubdomain', 'get_index', [], static::class);
+        $app->get('/randomsubdomain/settings', 'get_settings', [], static::class);
     }
 
-    /**
-     * Settings page
-     */
-    public function settings()
+    public function get_index(\Box_App $app)
     {
         $this->di['is_admin_logged'];
-        return $this->di['view']->render('mod_Randomsubdomain_settings');
+        return $app->render('mod_Randomsubdomain_index');
+    }
+
+    public function get_settings(\Box_App $app)
+    {
+        $this->di['is_admin_logged'];
+        return $app->render('mod_Randomsubdomain_settings');
     }
 }
